@@ -2,8 +2,12 @@
   <div>
     <div :class="rowClass">
       <div class="cell">
-        <span :style="nameCellStyle">{{ user.name }}</span>
+        <span class="svg-wrapper" :style="nameCellStyle">
+          <DotIcon v-if="nestingLevel > 0"> </DotIcon>
+        </span>
+        {{ user.name }}
         <span
+          class="svg-wrapper"
           @click="toggleSubUsers"
           v-if="user.subUsers && user.subUsers.length"
         >
@@ -30,12 +34,14 @@
 import { ref } from 'vue'
 import UserRow from './UserRow'
 import DotsIcon from '@/icons/DotsIcon'
+import DotIcon from '@/icons/DotIcon'
 
 export default {
   name: 'UserRow',
   components: {
     UserRow,
-    DotsIcon
+    DotsIcon,
+    DotIcon
   },
   props: ['user', 'nestingLevel', 'totalUserCount'],
   setup(props) {

@@ -18,6 +18,12 @@ svg {
   cursor: pointer;
 }
 
+.svg-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #app {
   display: flex;
   flex-direction: column;
