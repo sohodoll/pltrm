@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 html,
@@ -11,6 +12,10 @@ body {
   font-family: 'Rubik', sans-serif;
   height: 100%;
   width: 100%;
+}
+
+svg {
+  cursor: pointer;
 }
 
 #app {

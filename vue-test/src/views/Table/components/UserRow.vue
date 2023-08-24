@@ -3,6 +3,7 @@
     <div :class="rowClass">
       <div class="cell">
         <span :style="nameCellStyle">{{ user.name }}</span>
+        <DotsIcon v-if="user.subUsers && user.subUsers.length" />
       </div>
       <div class="cell">{{ user.phone }}</div>
     </div>
@@ -19,11 +20,13 @@
 
 <script>
 import UserRow from './UserRow'
+import DotsIcon from '@/icons/DotsIcon'
 
 export default {
   name: 'UserRow',
   components: {
-    UserRow
+    UserRow,
+    DotsIcon
   },
   props: ['user', 'nestingLevel', 'totalUserCount'],
   setup(props) {

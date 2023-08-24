@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import UserRow from './UserRow'
+import UserRow from './components/UserRow'
 
 export default {
   name: 'Table',

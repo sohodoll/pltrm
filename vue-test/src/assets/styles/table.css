@@ -52,6 +52,8 @@
   padding: 15px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .cell:not(:last-child) {
