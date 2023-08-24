@@ -19,8 +19,6 @@ module.exports = {
     '!src/main.js',
     '!**/node_modules/**'
   ],
-  jest: {
-    verbose: true,
-    testURL: 'http://localhost/'
-  }
+  verbose: true,
+  testURL: 'http://localhost/'
 }
