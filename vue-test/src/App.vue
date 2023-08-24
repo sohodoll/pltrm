@@ -1,6 +1,6 @@
 <template>
   <main id="app">
-    <Table :users="users" />
+    <Table :users="users" :totalUserCount="totalUserCount" />
     <Modal v-if="showModal" />
   </main>
 </template>
@@ -19,12 +19,13 @@ export default {
   },
   setup() {
     const showModal = ref(false)
-    const { users, error } = getUsers()
+    const { users, error, totalUserCount } = getUsers()
 
     return {
       showModal,
       users,
-      error
+      error,
+      totalUserCount
     }
   }
 }
