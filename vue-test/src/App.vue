@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
-  </div>
+  <main id="app">
+    <Table :users="users" />
+    <Modal v-if="showModal" />
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import { ref } from 'vue'
+import { getUsers } from '@/composables/getUsers'
+import Table from '@/views//Table/Table'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Table,
+    Modal
+  },
+  setup() {
+    const showModal = ref(false)
+    const { users, error } = getUsers()
+
+    return {
+      showModal,
+      users,
+      error
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

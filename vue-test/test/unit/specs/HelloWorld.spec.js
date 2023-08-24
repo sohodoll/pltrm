@@ -1,11 +1,10 @@
 import Vue from 'vue'
-import HelloWorld from '@/components/HelloWorld'
+import Table from '@/components/Table'
 
-describe('HelloWorld.vue', () => {
+describe('Table.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(HelloWorld)
+    const Constructor = Vue.extend(Table)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.hello h1').textContent)
-      .toEqual('Welcome to Your Vue.js App')
+    expect(vm.$el.querySelector('.title h1').textContent).toEqual('Hello')
   })
 })
