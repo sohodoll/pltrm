@@ -12,25 +12,30 @@ export const mockUsers = () => {
         createUser({
           name: 'Mary Doe',
           phone: '555-555-5555',
-          id: 4,
+          id: 5,
           isParent: true,
           isChild: true,
           subUsers: [
             createUser({
               name: 'Macy Doe',
               phone: '555-555-5555',
-              id: 5,
+              id: 6,
               isParent: true,
               isChild: true,
               subUsers: [
                 createUser({
                   name: 'Jack Last',
                   phone: '555-555-5555',
-                  id: 6
+                  id: 7
                 })
               ]
             })
           ]
+        }),
+        createUser({
+          name: 'Second Doe',
+          phone: '555-555-5555',
+          id: 4
         })
       ]
     }),
