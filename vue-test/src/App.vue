@@ -1,7 +1,12 @@
 <template>
   <main id="app">
-    <Table :users="users" :totalUserCount="totalUserCount" />
-    <Modal v-if="showModal" />
+    <div class="container">
+      <Table :users="users" :totalUserCount="totalUserCount" />
+      <Modal v-if="showModal" :closeModal="closeModal" />
+      <button type="button" class="add-button" @click="showModal = !showModal">
+        Add User
+      </button>
+    </div>
   </main>
 </template>
 
@@ -19,10 +24,15 @@ export default {
   },
   setup() {
     const showModal = ref(false)
-    const { users, error, totalUserCount } = getUsers()
+    const { users, error, totalUserCount, addUser } = getUsers()
+
+    const closeModal = () => {
+      showModal.value = false
+    }
 
     return {
       showModal,
+      closeModal,
       users,
       error,
       totalUserCount

@@ -25,14 +25,14 @@ export const getUsers = () => {
 
   const addUser = user => {
     users.value.push(user)
-    syncLocalStorage()
     totalUserCount.value = getTotalUserCount(users.value)
+    syncLocalStorage()
   }
 
   if (!users.value.length) {
     users.value = mockUsers()
-    syncLocalStorage()
     totalUserCount.value = getTotalUserCount(users.value)
+    syncLocalStorage()
   }
 
   if (!users.value.length) {

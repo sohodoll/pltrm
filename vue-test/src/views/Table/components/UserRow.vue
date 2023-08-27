@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <article>
     <div :class="rowClass">
       <div class="cell">
         <span class="svg-wrapper" :style="nameCellStyle">
@@ -27,7 +27,7 @@
         :nestingLevel="nestingLevel + 1"
       />
     </div>
-  </div>
+  </article>
 </template>
 
 <script>

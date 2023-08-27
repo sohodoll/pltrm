@@ -1,0 +1,11 @@
+.add-button {
+  cursor: pointer;
+  background: var(--color-secondary);
+  font-weight: 600;
+  padding: 1em 2rem;
+  outline: none;
+  border: none;
+  border-radius: var(--border-radius);
+  display: block;
+  margin: 1rem auto 0 auto;
+}

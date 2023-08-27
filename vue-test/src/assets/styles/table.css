@@ -1,8 +1,12 @@
-.container {
+.table-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 0 auto;
+  max-width: 40vw;
+  margin: 3rem auto 0 auto;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .header {
@@ -32,7 +36,6 @@
 }
 
 .row {
-  overflow: hidden;
   background: var(--color-background);
   width: 100%;
   display: flex;
