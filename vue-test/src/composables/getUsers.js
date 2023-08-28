@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { mockUsers } from '@/data/mockUsers.js'
+import { createUser } from '@/utils/createUser'
 
 //this is the main logic behind the task
 //I decided to use a simple constructor instead of vuex to keep everything simple and lightweight
@@ -37,11 +38,11 @@ export const getUsers = () => {
       return 0
     })
 
-    usersArray.forEach(user => {
+    for (const user of usersArray) {
       if (user.isParent) {
         sortUsers(user.subUsers, type, order)
       }
-    })
+    }
   }
 
   //recursively finding a user by id
@@ -67,14 +68,12 @@ export const getUsers = () => {
   }
 
   const addUser = (userName, userTelephone, isChild, childToUserId) => {
-    const user = {
-      id: Date.now(),
+    const user = createUser({
       name: userName,
       phone: userTelephone,
-      isParent: false,
-      isChild,
-      subUsers: []
-    }
+      id: Date.now(),
+      isChild
+    })
 
     //pushing the new user to the subusers or the main users array
     if (isChild) {
