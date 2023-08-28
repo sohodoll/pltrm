@@ -16,6 +16,7 @@
 
 ## Coming Soon
 
+- TypeScript
 - Deleting Users
 - Mobile
 - Error handling
