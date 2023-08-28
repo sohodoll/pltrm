@@ -22,38 +22,26 @@ export const getUsers = () => {
 
   //sort users by type and order
   const sortUsers = (usersArray, type, order) => {
-    if (order === 'asc') {
-      usersArray.sort((a, b) => {
-        if (a[type] < b[type]) {
-          return -1
-        }
-        if (a[type] > b[type]) {
-          return 1
-        }
-        return 0
-      })
-      //recursively sorting subusers
-      usersArray.forEach(user => {
-        if (user.isParent) {
-          sortUsers(user.subUsers, type, order)
-        }
-      })
-    } else if (order === 'desc') {
-      usersArray.sort((a, b) => {
-        if (a[type] > b[type]) {
-          return -1
-        }
-        if (a[type] < b[type]) {
-          return 1
-        }
-        return 0
-      })
-      usersArray.forEach(user => {
-        if (user.isParent) {
-          sortUsers(user.subUsers, type, order)
-        }
-      })
-    }
+    const orderMultiplier = order === 'desc' ? 1 : -1
+
+    usersArray.sort((a, b) => {
+      const aValue = a[type]
+      const bValue = b[type]
+
+      if (aValue < bValue) {
+        return -1 * orderMultiplier
+      }
+      if (aValue > bValue) {
+        return 1 * orderMultiplier
+      }
+      return 0
+    })
+
+    usersArray.forEach(user => {
+      if (user.isParent) {
+        sortUsers(user.subUsers, type, order)
+      }
+    })
   }
 
   //recursively finding a user by id
@@ -103,10 +91,7 @@ export const getUsers = () => {
       users.value.push(user)
     }
 
-    console.log('here')
-
     syncLocalStorage()
-    console.log(users.value)
   }
 
   //fill the array with mock data if it's empty
