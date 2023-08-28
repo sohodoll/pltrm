@@ -8,4 +8,15 @@
   border-radius: var(--border-radius);
   display: block;
   margin: 1rem auto 0 auto;
+  transition: all 0.1s ease-in-out;
+}
+
+.add-button:hover {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.add-button:active {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
