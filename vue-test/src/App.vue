@@ -6,7 +6,7 @@
         <TableModal
           :closeModal="closeModal"
           :users="users"
-          :submitAction="addUser"
+          :addUser="addUser"
           :getAllUsers="getAllUsers"
         />
       </Modal>

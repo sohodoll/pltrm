@@ -1,24 +1,26 @@
 <template>
   <div class="modal">
     <div class="input-block">
-      <label for="name">Name:</label>
+      <label for="modal-name">Name:</label>
       <input
         v-model="nameInput"
         name="name"
+        id="modal-name"
         class="modal-input"
         type="text"
         placeholder="Eliud Kipchoge (at least 5 symbols)"
       />
     </div>
     <div class="input-block">
-      <label for="telephone">Telephone:</label>
+      <label for="modal-phone">Phone:</label>
       <input
-        v-model="telephoneInput"
-        name="telephone"
+        v-model="phoneInput"
+        id="modal-phone"
+        name="phone"
         class="modal-input"
         type="text"
         placeholder="111-111-111 (9 numbers)"
-        @input="onTelephoneInput"
+        @input="onPhoneInput"
       />
     </div>
     <div class="input-block">
@@ -29,7 +31,7 @@
         </option>
       </select>
     </div>
-    <button @click="confirmButtonAction" class="add-button">Confirm</button>
+    <button @click="onConfirmButton" class="add-button">Confirm</button>
     <span class="modal-error" v-show="modalError">
       Please check your inputs and try again.
     </span>
@@ -41,25 +43,29 @@ import { ref } from 'vue'
 
 export default {
   name: 'TableModal',
-  props: ['closeModal', 'submitAction', 'users', 'getAllUsers'],
+  props: ['closeModal', 'addUser', 'users', 'getAllUsers'],
   setup(props) {
     const nameInput = ref(null)
-    const telephoneInput = ref(null)
+    const phoneInput = ref(null)
     const parentUser = ref(null)
     const modalError = ref(false)
 
-    const { closeModal, users, submitAction, getAllUsers } = props
+    const { closeModal, users, addUser, getAllUsers } = props
     const currentUsers = getAllUsers(users)
 
     //formatting the telephone input
-    const onTelephoneInput = () => {
-      telephoneInput.value = telephoneInput.value.replace(/[^\d-]/g, '')
-      if (telephoneInput.value.length === 3) {
-        telephoneInput.value += '-'
-      } else if (telephoneInput.value.length === 7) {
-        telephoneInput.value += '-'
-      } else if (telephoneInput.value.length === 12) {
-        telephoneInput.value = telephoneInput.value.slice(0, -1)
+    const onPhoneInput = event => {
+      if (event && event.inputType === 'deleteContentBackward') {
+        return
+      }
+
+      phoneInput.value = phoneInput.value.replace(/[^\d-]/g, '')
+      if (phoneInput.value.length === 3) {
+        phoneInput.value += '-'
+      } else if (phoneInput.value.length === 7) {
+        phoneInput.value += '-'
+      } else if (phoneInput.value.length === 12) {
+        phoneInput.value = phoneInput.value.slice(0, -1)
       }
     }
 
@@ -67,9 +73,9 @@ export default {
     const validateInputs = () => {
       if (
         !nameInput.value ||
-        !telephoneInput.value ||
+        !phoneInput.value ||
         nameInput.value.length < 5 ||
-        telephoneInput.value.length < 11
+        phoneInput.value.length < 11
       ) {
         modalError.value = true
         return
@@ -78,21 +84,16 @@ export default {
       }
     }
 
-    const confirmButtonAction = () => {
+    const onConfirmButton = () => {
       validateInputs()
       if (modalError.value) {
         return
       } else {
-        //if there is no parent user, we pass false and null to the submitAction function (addUser, in this case)
+        //if there is no parent user, we pass false and null to the addUser function (will be clearer with TS)
         if (!parentUser.value) {
-          submitAction(nameInput.value, telephoneInput.value, false, null)
+          addUser(nameInput.value, phoneInput.value, false, null)
         } else {
-          submitAction(
-            nameInput.value,
-            telephoneInput.value,
-            true,
-            parentUser.value
-          )
+          addUser(nameInput.value, phoneInput.value, true, parentUser.value)
         }
       }
       closeModal()
@@ -100,12 +101,12 @@ export default {
 
     return {
       nameInput,
-      telephoneInput,
-      onTelephoneInput,
+      phoneInput,
+      onPhoneInput,
       parentUser,
       currentUsers,
       modalError,
-      confirmButtonAction
+      onConfirmButton
     }
   }
 }
