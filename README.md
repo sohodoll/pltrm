@@ -12,6 +12,7 @@
 ## Deploy
 
 - Deploy link: https://platrumusers.netlify.app/
+- Deploy branch: https://github.com/sohodoll/pltrm/tree/develop
 
 ## Coming Soon
 
