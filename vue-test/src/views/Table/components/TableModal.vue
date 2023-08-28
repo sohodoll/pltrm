@@ -53,6 +53,7 @@ export default {
 
     //formatting the telephone input
     const onTelephoneInput = () => {
+      telephoneInput.value = telephoneInput.value.replace(/[^\d-]/g, '')
       if (telephoneInput.value.length === 3) {
         telephoneInput.value += '-'
       } else if (telephoneInput.value.length === 7) {

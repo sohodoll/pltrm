@@ -1,7 +1,8 @@
 import { ref } from 'vue'
 import { mockUsers } from '@/data/mockUsers.js'
 
-//create a composable function to keep our code simple
+//this is the main logic behind the task
+//I decided to use a simple constructor instead of vuex to keep everything simple and lightweight
 export const getUsers = () => {
   const users = ref(JSON.parse(localStorage.getItem('users') || '[]'))
   const error = ref(null)
@@ -19,6 +20,7 @@ export const getUsers = () => {
     return allUsers
   }
 
+  //sort users by type and order
   const sortUsers = (usersArray, type, order) => {
     if (order === 'asc') {
       usersArray.sort((a, b) => {
@@ -30,6 +32,7 @@ export const getUsers = () => {
         }
         return 0
       })
+      //recursively sorting subusers
       usersArray.forEach(user => {
         if (user.isParent) {
           sortUsers(user.subUsers, type, order)
@@ -57,16 +60,17 @@ export const getUsers = () => {
   const findUser = (usersArray, userId) => {
     let user = null
 
-    usersArray.forEach(userItem => {
+    for (const userItem of usersArray) {
       if (userItem.id === userId) {
         user = userItem
-        return
+        break
       } else if (userItem.isParent) {
         user = findUser(userItem.subUsers, userId)
-        return
+        if (user) {
+          break
+        }
       }
-    })
-
+    }
     return user
   }
 
@@ -87,6 +91,7 @@ export const getUsers = () => {
     //pushing the new user to the subusers or the main users array
     if (isChild) {
       const parentUser = findUser(users.value, childToUserId)
+
       if (parentUser) {
         parentUser.subUsers.push(user)
         parentUser.isParent = true
@@ -98,7 +103,10 @@ export const getUsers = () => {
       users.value.push(user)
     }
 
+    console.log('here')
+
     syncLocalStorage()
+    console.log(users.value)
   }
 
   //fill the array with mock data if it's empty
