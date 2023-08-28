@@ -1,7 +1,7 @@
 <template>
   <main id="app">
     <div class="container">
-      <Table :users="users" />
+      <Table :users="users" :sortUsers="sortUsers" />
       <Modal v-if="showModal" :closeModal="closeModal">
         <TableModal
           :closeModal="closeModal"
@@ -33,7 +33,7 @@ export default {
   },
   setup() {
     const showModal = ref(false)
-    const { users, error, addUser, getAllUsers } = getUsers()
+    const { users, error, addUser, getAllUsers, sortUsers } = getUsers()
 
     const closeModal = () => {
       showModal.value = false
@@ -42,6 +42,7 @@ export default {
     return {
       showModal,
       closeModal,
+      sortUsers,
       addUser,
       users,
       error,

@@ -19,6 +19,40 @@ export const getUsers = () => {
     return allUsers
   }
 
+  const sortUsers = (usersArray, type, order) => {
+    if (order === 'asc') {
+      usersArray.sort((a, b) => {
+        if (a[type] < b[type]) {
+          return -1
+        }
+        if (a[type] > b[type]) {
+          return 1
+        }
+        return 0
+      })
+      usersArray.forEach(user => {
+        if (user.isParent) {
+          sortUsers(user.subUsers, type, order)
+        }
+      })
+    } else if (order === 'desc') {
+      usersArray.sort((a, b) => {
+        if (a[type] > b[type]) {
+          return -1
+        }
+        if (a[type] < b[type]) {
+          return 1
+        }
+        return 0
+      })
+      usersArray.forEach(user => {
+        if (user.isParent) {
+          sortUsers(user.subUsers, type, order)
+        }
+      })
+    }
+  }
+
   //recursively finding a user by id
   const findUser = (usersArray, userId) => {
     let user = null
@@ -77,6 +111,7 @@ export const getUsers = () => {
     users,
     error,
     addUser,
+    sortUsers,
     getAllUsers
   }
 }
