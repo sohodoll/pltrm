@@ -1,4 +1,4 @@
-import { createUser } from '../utils/createUser'
+import { createUser } from '@/helpers/createUser'
 
 export const mockUsers = () => {
   const mockUsersArray = [

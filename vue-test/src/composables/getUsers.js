@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { mockUsers } from '@/data/mockUsers.js'
-import { createUser } from '@/utils/createUser'
+import { createUser } from '@/helpers/createUser'
 
 //this is the main logic behind the task
 //I decided to use a simple constructor instead of vuex to keep everything simple and lightweight
@@ -21,7 +21,7 @@ export const getUsers = () => {
     return allUsers
   }
 
-  //sort users by type and order
+  //recursively sorting users by type and order
   const sortUsers = (usersArray, type, order) => {
     const orderMultiplier = order === 'desc' ? 1 : -1
 
