@@ -10,7 +10,6 @@
         :key="user.id"
         :user="user"
         :nestingLevel="0"
-        :totalUserCount="totalUserCount"
       />
     </div>
   </div>
@@ -24,7 +23,7 @@ export default {
   components: {
     UserRow
   },
-  props: ['users', 'totalUserCount'],
+  props: ['users'],
   setup() {
     return {}
   }

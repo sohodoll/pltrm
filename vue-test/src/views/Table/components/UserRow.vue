@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div :class="rowClass">
+    <div class="row">
       <div class="cell">
         <span class="svg-wrapper" :style="nameCellStyle">
           <DotIcon v-if="nestingLevel > 0"> </DotIcon>
@@ -9,17 +9,14 @@
         <span
           class="svg-wrapper"
           @click="toggleSubUsers"
-          v-if="user.subUsers && user.subUsers.length"
+          v-if="user.subUsers.length"
         >
           <DotsIcon />
         </span>
       </div>
       <div class="cell">{{ user.phone }}</div>
     </div>
-    <div
-      v-if="showSubUsers && user.subUsers && user.subUsers.length"
-      class="sub-users"
-    >
+    <div v-if="showSubUsers && user.subUsers.length" class="sub-users">
       <UserRow
         v-for="subUser in user.subUsers"
         :user="subUser"
@@ -43,11 +40,8 @@ export default {
     DotsIcon,
     DotIcon
   },
-  props: ['user', 'nestingLevel', 'totalUserCount'],
+  props: ['user', 'nestingLevel'],
   setup(props) {
-    const rowClass =
-      props.totalUserCount === props.user.id ? 'row last-row' : 'row'
-
     const nameCellStyle = {
       marginLeft: `${props.nestingLevel * 20}px`
     }
@@ -59,7 +53,6 @@ export default {
     }
 
     return {
-      rowClass,
       nameCellStyle,
       showSubUsers,
       toggleSubUsers

@@ -1,8 +1,15 @@
 <template>
   <main id="app">
     <div class="container">
-      <Table :users="users" :totalUserCount="totalUserCount" />
-      <Modal v-if="showModal" :closeModal="closeModal" />
+      <Table :users="users" />
+      <Modal v-if="showModal" :closeModal="closeModal">
+        <TableModal
+          :closeModal="closeModal"
+          :users="users"
+          :submitAction="addUser"
+          :getAllUsers="getAllUsers"
+        />
+      </Modal>
       <button type="button" class="add-button" @click="showModal = !showModal">
         Add User
       </button>
@@ -14,17 +21,19 @@
 import { ref } from 'vue'
 import { getUsers } from '@/composables/getUsers'
 import Table from '@/views//Table/Table'
+import TableModal from '@/views/Table/components/TableModal'
 import Modal from '@/components/Modal'
 
 export default {
   name: 'App',
   components: {
     Table,
+    TableModal,
     Modal
   },
   setup() {
     const showModal = ref(false)
-    const { users, error, totalUserCount, addUser } = getUsers()
+    const { users, error, addUser, getAllUsers } = getUsers()
 
     const closeModal = () => {
       showModal.value = false
@@ -33,9 +42,10 @@ export default {
     return {
       showModal,
       closeModal,
+      addUser,
       users,
       error,
-      totalUserCount
+      getAllUsers
     }
   }
 }
