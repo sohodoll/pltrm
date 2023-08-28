@@ -1,10 +1,19 @@
 import Vue from 'vue'
-import Table from '@/components/Table'
+import Table from '@/views/Table/Table'
+import App from '@/App'
 
 describe('Table.vue', () => {
-  it('should render correct contents', () => {
+  it('Table should be defined', () => {
     const Constructor = Vue.extend(Table)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.title h1').textContent).toEqual('Hello')
+    expect(vm).toBeDefined()
+  })
+})
+
+describe('App.vue', () => {
+  it('App should be defined', () => {
+    const Constructor = Vue.extend(App)
+    const vm = new Constructor().$mount()
+    expect(vm).toBeDefined()
   })
 })

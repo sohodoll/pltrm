@@ -40,6 +40,7 @@ export default {
     DotsIcon,
     DotIcon
   },
+  //we get the user and the nesting level (starting from 0 in the table component) from the parent component
   props: ['user', 'nestingLevel'],
   setup(props) {
     const nameCellStyle = {
