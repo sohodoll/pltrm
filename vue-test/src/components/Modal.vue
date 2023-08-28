@@ -3,7 +3,6 @@
     <div @click.stop>
       <slot></slot>
     </div>
-    >
   </div>
 </template>
 

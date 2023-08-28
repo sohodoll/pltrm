@@ -1,54 +1,69 @@
 <template>
-  <div class="modal">
-    <div class="input-block">
-      <label for="modal-name">Name:</label>
-      <input
-        v-model="nameInput"
-        name="name"
-        id="modal-name"
-        class="modal-input"
-        type="text"
-        placeholder="Eliud Kipchoge (at least 5 symbols)"
-      />
+  <div>
+    <div v-if="!isPending" class="modal">
+      <div class="input-block">
+        <label for="modal-name">Name:</label>
+        <input
+          v-model="nameInput"
+          name="name"
+          id="modal-name"
+          class="modal-input"
+          type="text"
+          placeholder="Eliud Kipchoge (at least 5 symbols)"
+        />
+      </div>
+      <div class="input-block">
+        <label for="modal-phone">Phone:</label>
+        <input
+          v-model="phoneInput"
+          id="modal-phone"
+          name="phone"
+          class="modal-input"
+          type="text"
+          placeholder="111-111-111 (9 numbers)"
+          @input="onPhoneInput"
+        />
+      </div>
+      <div class="input-block">
+        <label for="users">Subuser of:</label>
+        <select
+          class="modal-input"
+          v-model="parentUser"
+          name="users"
+          id="users"
+        >
+          <option v-for="user in currentUsers" :key="user.id" :value="user.id">
+            {{ user.name }}
+          </option>
+        </select>
+      </div>
+      <button type="button" @click="onConfirmButton" class="add-button">
+        Confirm
+      </button>
+      <span class="modal-error" v-show="modalError">
+        Please check your inputs and try again.
+      </span>
     </div>
-    <div class="input-block">
-      <label for="modal-phone">Phone:</label>
-      <input
-        v-model="phoneInput"
-        id="modal-phone"
-        name="phone"
-        class="modal-input"
-        type="text"
-        placeholder="111-111-111 (9 numbers)"
-        @input="onPhoneInput"
-      />
-    </div>
-    <div class="input-block">
-      <label for="users">Subuser of:</label>
-      <select class="modal-input" v-model="parentUser" name="users" id="users">
-        <option v-for="user in currentUsers" :key="user.id" :value="user.id">
-          {{ user.name }}
-        </option>
-      </select>
-    </div>
-    <button @click="onConfirmButton" class="add-button">Confirm</button>
-    <span class="modal-error" v-show="modalError">
-      Please check your inputs and try again.
-    </span>
+    <Spinner v-else />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import Spinner from '@/components/Spinner'
 
 export default {
   name: 'TableModal',
+  components: {
+    Spinner
+  },
   props: ['closeModal', 'addUser', 'users', 'getAllUsers'],
   setup(props) {
     const nameInput = ref(null)
     const phoneInput = ref(null)
     const parentUser = ref(null)
     const modalError = ref(false)
+    const isPending = ref(false)
 
     const { closeModal, users, addUser, getAllUsers } = props
     const currentUsers = getAllUsers(users)
@@ -96,7 +111,14 @@ export default {
           addUser(nameInput.value, phoneInput.value, true, parentUser.value)
         }
       }
-      closeModal()
+
+      //emulate a server request
+      isPending.value = true
+
+      setTimeout(() => {
+        isPending.value = false
+        closeModal()
+      }, 1000)
     }
 
     return {
@@ -106,7 +128,8 @@ export default {
       parentUser,
       currentUsers,
       modalError,
-      onConfirmButton
+      onConfirmButton,
+      isPending
     }
   }
 }
