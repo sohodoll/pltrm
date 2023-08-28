@@ -1,7 +1,7 @@
 .table-container {
   display: flex;
   flex-direction: column;
-  max-width: 50vw;
+  max-width: 900px;
   margin: 3rem auto 0 auto;
   background-color: white;
   border-top-left-radius: var(--border-radius);

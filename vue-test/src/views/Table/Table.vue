@@ -1,8 +1,8 @@
 <template>
   <div class="table-container">
     <div class="header">
-      <h3 @click="sortByNames" class="title">Имя</h3>
-      <h3 @click="sortByPhone" class="title">Телефон</h3>
+      <h3 @click="sortByNames" class="title">Name</h3>
+      <h3 @click="sortByPhone" class="title">Phone</h3>
     </div>
     <div class="content">
       <UserRow

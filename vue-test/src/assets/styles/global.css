@@ -22,7 +22,7 @@ input::-webkit-inner-spin-button {
 
 .container {
   margin: 0 auto;
-  max-width: 40vw;
+  padding: 0 2rem;
 }
 
 svg {
