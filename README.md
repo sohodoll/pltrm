@@ -6,6 +6,7 @@
 - Nesting Users
 - Sorting Users
 - Responsive
+- Mobile-ready
 - Scalable
 - Unit Tests (JEST)
 
@@ -18,8 +19,6 @@
 
 - TypeScript
 - Deleting Users
-- Mobile
-- Error handling
 - Database and HTTP requests
 
 ## Tech Stack
